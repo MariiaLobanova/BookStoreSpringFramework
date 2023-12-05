@@ -2,18 +2,21 @@ package com.example.bookStore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Component
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
     private final BookDao bookDao;
 
-@Autowired
+    @Autowired
     public BookController(BookDao bookDao) {
+
         this.bookDao = bookDao;
     }
 

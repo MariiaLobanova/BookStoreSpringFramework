@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Component
+
 public class BookDao {
 
     public void createBook( Book book) {
