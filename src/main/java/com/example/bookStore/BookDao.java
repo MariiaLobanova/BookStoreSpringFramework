@@ -1,13 +1,28 @@
 package com.example.bookStore;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-
+@Repository
 public class BookDao {
+    private DBConnection dbConnection;
+
+    @Autowired
+    public BookDao(DBConnection dbConnection){
+        this.dbConnection= dbConnection;
+    }
+
+    public BookDao() {
+
+    }
 
     public void createBook( Book book) {
         try (Connection connection = DBConnection.getConnection();
@@ -87,4 +102,13 @@ public class BookDao {
         }
         return null;
     }
+    @PostConstruct
+    public void init(){
+        System.out.println("BookDao bean is being initilised");
+    }
+    @PreDestroy
+    public void destroy() {
+        System.out.println("BookDao bean is destroyed");
+    }
+
 }

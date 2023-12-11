@@ -1,5 +1,7 @@
 package com.example.bookStore;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ public class BookController {
         this.bookDao = bookDao;
     }
 
-    @PostMapping
+    @GetMapping
     public Book getBook(@RequestBody Book book){
         bookDao.createBook(book);
         return book;
@@ -46,4 +48,14 @@ public class BookController {
     public Book getBookById(@PathVariable("id") int id) {
         return bookDao.getBookById(id);
     }
+
+    @PostConstruct
+    public void init(){
+        System.out.println("BookController bean is being initialized.");
+    }
+    @PreDestroy
+    public void destroy(){
+        System.out.println("BookController bean is destoyed.");
+    }
+
 }
